@@ -1,36 +1,87 @@
-.demo-bg {
-    opacity: 0.3;
-    position: absolute;
-    margin: 0 auto;
-    height: auto;
-  }
-
-main{
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    max-width: 500px;
-    padding: 20px;
-    margin: 0 auto;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
 }
 
-.tekst{
+.quiz-container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
     text-align: center;
-    margin: 0 auto;
-    color: blue;
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-.izracun{
-    text-align: center;
-    margin: 0 auto;
-    color: blue;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
-}
-button{
-    padding-top: 10;
-    padding: 20px;
+h1 {
+    color: #333;
+    margin-bottom: 10px;
 }
 
-.izracun p{
-    font-size: medium;
+h2 {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+.answers-container button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #e9e9e9;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.answers-container button:hover {
+    background-color: #dcdcdc;
+}
+
+.answers-container button.selected {
+    background-color: #cceeff;
+    border-color: #66b3ff;
+}
+
+.feedback-message {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.feedback-message.correct {
+    color: green;
+}
+
+.feedback-message.incorrect {
+    color: red;
+}
+
+#next-button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+#next-button:hover {
+    background-color: #0056b3;
+}
+
+#next-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
