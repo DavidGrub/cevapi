@@ -1,696 +1,311 @@
 const questions = [
     {
-        question: "Koje sve oblike trgovačkih društava imamo u Hrvatskoj:",
+        question: "Što je osnovna svrha kombinacijskih modula?",
         answers: [
-            "obrt",
-            "doo, jdoo i dioničko društvo",
-            "doo, jdoo, dioničko i obrt",
-            "ništa navedeno",
-            "obrt, doo, jdoo i dioničko društvo"
+            "Pohranjivanje velike količine podataka.",
+            "Izgradnja složenijih sustava od jednostavnih komponenti.",
+            "Kontrola rada sekvencijskih sklopova.",
+            "Mjerenje vremena i frekvencije.",
+            "Izvršavanje aritmetičkih operacija nad cijelim i miješanim brojevima."
         ],
-        correct: "doo, jdoo i dioničko društvo"
+        correct: "Izgradnja složenijih sustava od jednostavnih komponenti."
     },
     {
-        question: "Stope poreza na dobit u RH:",
+        question: "Koja je tipična oznaka za dekoder s 'n' ulaznih bitova?",
         answers: [
-            "5%, 10% i 15%",
-            "15%, 20% i 33%",
-            "10%, 18% i 33%",
-            "10%, 18% i 30%",
-            "15%, 20% i 30%"
+            "MUX n/2^n",
+            "KOD n/2^n",
+            "DEK n/2^n",
+            "DEMUX 2^n/n",
+            "PLA n/m"
         ],
-        correct: "10%, 18% i 30%"
+        correct: "DEK n/2^n"
     },
     {
-        question: "Radite u Mađarskoj a rezident ste u RH vi podliježete poreznim zakonima:",
+        question: "Što se događa s izlazima dekodera ako je ulaz 'E' (enable) postavljen na 0?",
         answers: [
-            "samostalno odlučujem",
-            "u Njemačkoj",
-            "nije zakonom definirano",
-            "u Hrvatskoj",
-            "ništa od navedenog"
+            "Svi izlazi su u stanju 1.",
+            "Samo jedan izlaz je u stanju 1.",
+            "Svi izlazi su u stanju 0.",
+            "Dekoder se aktivira.",
+            "Izlazi su invertirani."
         ],
-        correct: "u Hrvatskoj"
+        correct: "Svi izlazi su u stanju 0."
     },
     {
-        question: "Sitan inventar otpisuje se:",
+        question: "Koja je glavna funkcionalnost demultipleksora?",
         answers: [
-            "25%",
-            "50%",
-            "20%",
-            "100%",
-            "10%"
+            "Biranje informacije s jednog od ulaza i prijenos na jedan izlaz.",
+            "Primanje informacije na jednom ulazu i raspodjela na jedan od više izlaza.",
+            "Kodiranje binarnih kodnih riječi.",
+            "Usporedba dva n-bitna broja.",
+            "Generiranje periodičkih nizova impulsa."
         ],
-        correct: "100%"
+        correct: "Primanje informacije na jednom ulazu i raspodjela na jedan od više izlaza."
     },
     {
-        question: "Temeljni kapital može biti u obliku:",
+        question: "Koja je obrnuta funkcionalnost od demultipleksora?",
         answers: [
-            "novca i stvari",
-            "stvari i prava",
-            "novca, stvari i prava",
-            "novca",
-            "novca i prava"
+            "Dekoder",
+            "Koder",
+            "Multipleksor",
+            "Komparator",
+            "Pretvornik koda"
         ],
-        correct: "novca, stvari i prava"
+        correct: "Multipleksor"
     },
     {
-        question: "Temeljni kapital reguliran je:",
+        question: "Što je karakteristika prioritetnog kodera ako je aktivno više ulaza?",
         answers: [
-            "zakonom o računovodstvu",
-            "zakonom o obrtu",
-            "ništa navedeno",
-            "propisima RH",
-            "propisima EU"
+            "Aktivan je samo ulaz s najmanjim indeksom.",
+            "Aktivan je samo ulaz s najvećim indeksom.",
+            "Svi aktivni ulazi se kodiraju istovremeno.",
+            "Koder se deaktivira.",
+            "Djeluje samo onaj ulaz koji je prvi postao aktivan."
         ],
-        correct: "propisima RH"
+        correct: "Aktivan je samo ulaz s najvećim indeksom."
     },
     {
-        question: "Točka pokrića govori o:",
+        question: "Koji sklop pretvara kodne riječi jednog koda u kodne riječi drugog koda?",
         answers: [
-            "inflaciji",
-            "ništa navedeno",
-            "prihodima",
-            "pragu rentabilnosti",
-            "troškovima"
+            "Dekoder",
+            "Koder",
+            "Multipleksor",
+            "Pretvornik koda",
+            "Komparator"
         ],
-        correct: "pragu rentabilnosti"
+        correct: "Pretvornik koda"
     },
     {
-        question: "Sitnim invertarom se smatraju slušalice do iznosa:",
+        question: "Koji su mogući izlazi komparatora za usporedbu dva n-bitna broja A i B?",
         answers: [
-            "do 300 eura",
-            "do 650 eura (točnije do 665 eura)",
-            "do 250 eura",
-            "do 500 eura",
-            "do 1000 eura"
+            "A XOR B",
+            "A AND B, A OR B",
+            "A = B, A > B, A < B",
+            "SUM, CARRY",
+            "Q, Q̄"
         ],
-        correct: "do 650 eura (točnije do 665 eura)"
+        correct: "A = B, A > B, A < B"
     },
     {
-        question: "U svijetu poduzetništva koliko poduzeća preživi 3 godine:",
+        question: "Što je radni dio procesora koji obavlja operacije nad cijelim i miješanim brojevima?",
         answers: [
-            "1/2",
-            "1/6",
-            "1/3",
-            "1/5",
-            "1/7"
+            "RAM",
+            "ROM",
+            "ALU (Aritmetičko-logička jedinica)",
+            "Kontrolna jedinica",
+            "Registar"
         ],
-        correct: "1/3"
+        correct: "ALU (Aritmetičko-logička jedinica)"
     },
     {
-        question: "Imate položeni majstorski ispit. Koji obrt možete otvoriti?",
+        question: "Koja je osnovna funkcija poluzbrajala (Half-adder)?",
         answers: [
-            "povlašteni obrt",
-            "paušalni obrt",
-            "vezani obrt",
-            "slobodni obrt",
-            "ništa navedeno"
+            "Zbrajanje tri binarne znamenke.",
+            "Oduzimanje dvije binarne znamenke.",
+            "Zbrajanje dvije binarne znamenke.",
+            "Množenje dvije binarne znamenke.",
+            "Računanje prijenosa za više bitova."
         ],
-        correct: "vezani obrt"
+        correct: "Zbrajanje dvije binarne znamenke."
     },
     {
-        question: "Radite u Mađarskoj, a supruga i djeca vam žive u Hrvatskoj, vi ste u Hrvatskoj:",
+        question: "Koja metoda rješava problem serijskog rasprostiranja prijenosa kod zbrajanja višebitnih brojeva?",
         answers: [
-            "djelomični nerezistent",
-            "rezident RH",
-            "ništa navedeno",
-            "sve navedeno",
-            "nerezident RH"
+            "Kaskadiranje poluzbrajala.",
+            "Korištenje akumulatora.",
+            "Izdvojeno generiranje prijenosa (Carry Look-Ahead - CLA).",
+            "Zbrajanje u BCD kodu.",
+            "Primjena posmačnih registara."
         ],
-        correct: "rezident RH"
+        correct: "Izdvojeno generiranje prijenosa (Carry Look-Ahead - CLA)."
     },
     {
-        question: "Temeljni kapital doo:",
+        question: "Što je potrebno kod BCD zbrajanja ako je suma između 10 i 15, ili veća od 15?",
         answers: [
-            "2000 eura",
-            "500 eura",
-            "2500 eura",
-            "1500 eura",
-            "1000 eura"
+            "Oduzimanje 6 (0110).",
+            "Dodavanje 6 (0110) radi korekcije.",
+            "Zbrajanje se poništava.",
+            "Nema potrebe za korekcijom.",
+            "Primjena kružnog posmaka."
         ],
-        correct: "2500 eura"
+        correct: "Dodavanje 6 (0110) radi korekcije."
     },
     {
-        question: "SWOT analizom istražujemo:",
+        question: "Koja vrsta posmaka ponavlja najznačajniji bit pri posmaku udesno za brojeve s predznakom?",
         answers: [
-            "eko sustav",
-            "ništa navedeno",
-            "poduzeća na tržištu",
-            "tržište",
-            "ekonomiju"
+            "Logički posmak.",
+            "Kružni posmak.",
+            "Aritmetički posmak.",
+            "Cirkularni posmak.",
+            "Nema takvog posmaka."
         ],
-        correct: "tržište"
+        correct: "Aritmetički posmak."
     },
     {
-        question: "Kolika je prosječna dob osnivača startupa:",
+        question: "Koja memorija zadržava podatke i kada nema napajanja?",
         answers: [
-            "30 godina",
-            "40 godina",
-            "25 godina",
-            "45 godina",
-            "35 godina"
+            "Volatile memorija.",
+            "SRAM.",
+            "Nepostojana memorija.",
+            "Postojana (non-volatile) memorija.",
+            "DRAM."
         ],
-        correct: "45 godina"
+        correct: "Postojana (non-volatile) memorija."
     },
     {
-        question: "Koji se dohodak smatra ugovorom o djelu:",
+        question: "Što je kapacitet memorije ako je 'n' broj adresnih bitova i 'b' broj bitova izlazne riječi?",
         answers: [
-            "samostalna djelatnost",
-            "dohodak od nesamostalnog rada",
-            "drugi dohodak",
-            "i drugi dohodak i dohodak od nesamostalnog rada",
-            "ništa od navedenog"
+            "C = n * b",
+            "C = 2^n",
+            "C = 2^n * b",
+            "C = n + b",
+            "C = 2^b"
         ],
-        correct: "drugi dohodak"
+        correct: "C = 2^n * b"
     },
     {
-        question: "Amortizacija je:",
+        question: "Koja je glavna karakteristika PROM memorije?",
         answers: [
-            "postupno trošenje kratkotrajne imovine",
-            "postupno trošenje dugotrajne imovine",
-            "kupovina dugotrajne imovine",
-            "prodaja dugotrajne imovine",
-            "prodaja kratkotrajne imovine"
+            "Neprogramirljiva, MOSFET tehnologija.",
+            "Višekratno programiranje i brisanje UV svjetlom.",
+            "Jednokratno programiranje, programiranje taljenjem osigurača.",
+            "Višekratno programiranje i brisanje električkim putem.",
+            "Sadržaj se upisuje kod proizvodnje."
         ],
-        correct: "postupno trošenje dugotrajne imovine"
+        correct: "Jednokratno programiranje, programiranje taljenjem osigurača."
     },
     {
-        question: "U Hrvatskoj nemate prebivalište ni boravište, a zaposleni ste u državnoj službi i po toj osnovi primate plaću. Vi ste u Hrvatskoj:",
+        question: "Koji je primarni nedostatak PLA (Programmable Logic Array)?",
         answers: [
-            "sve navedeno",
-            "ništa navedenoga",
-            "nerezident RH",
-            "rezident",
-            "nije definirano zakonom"
+            "Jednostavnost programiranja.",
+            "Niska cijena.",
+            "Složenost programiranja, brzina rada i teškoća proizvodnje programirljivih sklopki.",
+            "Niska fleksibilnost.",
+            "Mali broj proizvoda."
         ],
-        correct: "rezident"
+        correct: "Složenost programiranja, brzina rada i teškoća proizvodnje programirljivih sklopki."
     },
     {
-        question: "Tvrtka je:",
+        question: "Po čemu se PAL (Programmable Array Logic) razlikuje od PLA?",
         answers: [
-            "ime pod kojim poduzeće posluje",
-            "drugi naziv za poduzeće",
-            "isto što i trgovačko društvo pdf strana 91",
-            "ništa navedeno",
-            "isto što i obrt"
+            "PAL ima programirljiva i I i ILI polja.",
+            "PAL je složenija i sporija od PLA.",
+            "Kod PAL-a je programirljiva samo matrica I sklopova.",
+            "PAL koristi logičke blokove umjesto I/ILI polja.",
+            "PAL ima manji broj programirljivih sklopki."
         ],
-        correct: "ime pod kojim poduzeće posluje"
+        correct: "Kod PAL-a je programirljiva samo matrica I sklopova."
     },
     {
-        question: "Koji je postotak mikro poduzeća unutar Europske unije:",
+        question: "Što je bistabil?",
         answers: [
-            "98%",
-            "95%",
-            "91%",
-            "90%",
-            "99%"
+            "Kombinacijski logički sklop.",
+            "Sekvencijski sklop za brojanje impulsa.",
+            "Memorijski element, digitalni sklop s dva stabilna stanja.",
+            "Sklop za usporedbu brojeva.",
+            "Element za pretvorbu koda."
         ],
-        correct: "99%"
+        correct: "Memorijski element, digitalni sklop s dva stabilna stanja."
     },
     {
-        question: "Koliko se može imati najduže sezonski obrt:",
+        question: "Koji tip bistabila služi samo za pamćenje jednog bita informacije i koristi se za registre i memorije?",
         answers: [
-            "9 mjeseci",
-            "1 godinu",
-            "4 mjeseca",
-            "3 mjeseca",
-            "6 mjeseci"
+            "SR bistabil",
+            "JK bistabil",
+            "T bistabil",
+            "D bistabil",
+            "RS bistabil"
         ],
-        correct: "9 mjeseci"
+        correct: "D bistabil"
     },
     {
-        question: "Od koje vrijednosti se računalna oprema smatra osnovnim sredstvom:",
+        question: "Što je osnovna svrha registara u digitalnim sustavima?",
         answers: [
-            "do 1000 eura",
-            "preko 350 eura",
-            "preko 200 eura",
-            "preko 400 eura",
-            "preko 500 eura (točnije preko 665 eura)"
+            "Izvršavanje aritmetičkih operacija.",
+            "Pohranjivanje višebitnih podataka.",
+            "Generiranje taktnih impulsa.",
+            "Pretvaranje koda.",
+            "Uspoređivanje podataka."
         ],
-        correct: "preko 500 eura (točnije preko 665 eura)"
+        correct: "Pohranjivanje višebitnih podataka."
     },
     {
-        question: "Parafiskalni nameti plaćaju se prema:",
+        question: "Koja je karakteristika posmačnih registara?",
         answers: [
-            "prihodima",
-            "veličini poduzeća",
-            "porezu",
-            "ništa navedeno",
-            "djelatnosti"
+            "Samo paralelni upis i ispis podataka.",
+            "Nema mehanizma pomicanja podataka.",
+            "Serijski upis i ispis podataka s mehanizmom pomicanja.",
+            "Sastavljeni su od nepovezanih bistabila.",
+            "Koriste se isključivo za dijeljenje frekvencije."
         ],
-        correct: "djelatnosti"
+        correct: "Serijski upis i ispis podataka s mehanizmom pomicanja."
     },
     {
-        question: "Koliko Hrvatska ima jednoroga:",
+        question: "Koja je primjena Johnsonovog brojila koja se postiže povratnom vezom s izlaza posmačnog registra na ulaz (D0 \n\t​=Q\n\tˉ\n\t​n−1\n\t​)?",
         answers: [
-            "4",
-            "3",
-            "5",
-            "2",
-            "1"
+            "Smanjenje broja stanja.",
+            "Povećanje broja stanja za dani broj bistabila (2n).",
+            "Samo brojanje u binarnom kodu.",
+            "Isključivo asinkroni rad.",
+            "Pojednostavljeno dekodiranje stanja bez dodatnog sklopa."
         ],
-        correct: "2"
+        correct: "Povećanje broja stanja za dani broj bistabila (2n)."
     },
     {
-        question: "Za vezani obrt potrebno je posjedovati:",
+        question: "Koja je temeljna jedinica informacije u memoriji?",
         answers: [
-            "potvrdu o završenom tečaju",
-            "povlasticu nadležne ustanove",
-            "završen fakultet u struci",
-            "majstorski ispit",
-            "ništa od navedenog"
+            "Bit.",
+            "Bajt.",
+            "Memorijska riječ.",
+            "Logički blok.",
+            "Minterm."
         ],
-        correct: "majstorski ispit"
+        correct: "Memorijska riječ."
     },
     {
-        question: "Koliko iznosi temeljni kapital kod jdoo:",
+        question: "Koja karakteristika memorije opisuje sposobnost zadržavanja podataka bez napajanja?",
         answers: [
-            "1 euro",
-            "100 eura",
-            "5 eura",
-            "10 eura",
-            "50 eura"
+            "Brzina.",
+            "Kapacitet.",
+            "Adresabilnost.",
+            "Postojanost (volatilnost).",
+            "Vrijeme pristupa."
         ],
-        correct: "1 euro"
+        correct: "Postojanost (volatilnost)."
     },
     {
-        question: "Za povlašteni obrt potrebno je posjedovati:",
+        question: "Koja memorija omogućuje istovremeni pristup bilo kojoj memorijskoj lokaciji, s jednakim vremenom pristupa za sve lokacije?",
         answers: [
-            "licencu",
-            "povlasticu nadležnih ustanova",
-            "majstorski ispit",
-            "ništa navedeno",
-            "strukovnu školu"
+            "Serijska memorija.",
+            "ROM.",
+            "Sekvencijalna memorija.",
+            "RAM (Random Access Memory).",
+            "Magnetska traka."
         ],
-        correct: "povlasticu nadležnih ustanova"
+        correct: "RAM (Random Access Memory)."
     },
     {
-        question: "Segmenti PEST analize su:",
+        question: "Koja je glavna razlika između statičkih (SRAM) i dinamičkih (DRAM) memorija u smislu osvježavanja?",
         answers: [
-            "ekonomski, pravni, društveni i ustrojstveni",
-            "politički, ekonomski, pravni i tehnologija",
-            "ništa navedeno",
-            "sve navedeno",
-            "politički, ekonomski, tehnologija i društva"
+            "SRAM zahtijeva osvježavanje, DRAM ne.",
+            "DRAM zahtijeva osvježavanje, SRAM ne.",
+            "Obje zahtijevaju stalno osvježavanje.",
+            "Niti jedna ne zahtijeva osvježavanje.",
+            "Osvježavanje je potrebno samo pri pisanju podataka."
         ],
-        correct: "politički, ekonomski, tehnologija i društva"
+        correct: "DRAM zahtijeva osvježavanje, SRAM ne."
     },
     {
-        question: "Najčešći oblici poslovnih subjekata u RH:",
+        question: "Koji je prvi korak u pristupu DRAM memoriji?",
         answers: [
-            "(O)PG-ovi",
-            "ništa navedeno",
-            "obrt, trgovačka društva, samostalna djelatnost i (O)PG",
-            "obrt, samostalna djelatnost i (O)PG",
-            "trgovačka društva, samostalna djelatnost i (O)PG"
+            "Pristup stupcu (CAS).",
+            "Pretpunjenje (Precharging).",
+            "Pristup retku (RAS).",
+            "Upis podataka.",
+            "Čitanje podataka."
         ],
-        correct: "obrt, trgovačka društva, samostalna djelatnost i (O)PG"
-    },
-    {
-        question: "Poslovni plan temelj je za investiranje do iznosa:",
-        answers: [
-            "10 000 eura",
-            "100 000 eura",
-            "200 000 eura",
-            "50 000 eura",
-            "150 000 eura"
-        ],
-        correct: "50 000 eura"
-    },
-    {
-        question: "Koliko imamo faza razvoja startupa:",
-        answers: [
-            "15",
-            "3",
-            "5",
-            "7",
-            "10"
-        ],
-        correct: "5"
-    },
-    {
-        question: "Rezidente i nerezidente veže zakon o:",
-        answers: [
-            "nesamostalnom radu",
-            "dobiti",
-            "porezu na dohodak",
-            "porezu na imovinu",
-            "poduzećima"
-        ],
-        correct: "porezu na dohodak"
-    },
-    {
-        question: "Radite u Njemačkoj, a u Hrvatskoj imate djecu, vi ste u Hrvatskoj:",
-        answers: [
-            "rezident RH",
-            "ništa navedeno",
-            "nerezident RH",
-            "i rezident i nerezident",
-            "vlasnik"
-        ],
-        correct: "rezident RH"
-    },
-    {
-        question: "Nerezidenti u Hrvatskoj su sve osobe koje:",
-        answers: [
-            "rade i državnoj službi i tako ostvaruju dohodak",
-            "imaju boravište u RH",
-            "nemaju prebivalište ni boravište u RH",
-            "ništa navedeno",
-            "imaju prebivalište i boravište u RH"
-        ],
-        correct: "nemaju prebivalište ni boravište u RH"
-    },
-    {
-        question: "Mjesečni osobni odbitak u 2025. godini iznosi:",
-        answers: [
-            "530,90 eura",
-            "350 eura",
-            "430,90 eura",
-            "500 eura",
-            "330,90 eura",
-            "600 eura"
-        ],
-        correct: "600 eura"
-    },
-    {
-        question: "Osnovna sredstva imaju vijek trajanja:",
-        answers: [
-            "dulji od 5 godina",
-            "do jedne godine",
-            "dulji od 2 godine",
-            "dulji od 1 godine",
-            "ništa navedeno"
-        ],
-        correct: "dulji od 1 godine"
-    },
-    {
-        question: "Kod ugovora o djelu, isplaćuje se:",
-        answers: [
-            "drugi dohodak",
-            "autorski honorar",
-            "ništa navedeno",
-            "dohodak od nesamostalnog rada",
-            "dohodak od samostalnog i ne samostalnog rada"
-        ],
-        correct: "drugi dohodak"
-    },
-    {
-        question: "Platno poslovnog modela sastoji se od koliko segemenata:",
-        answers: [
-            "7",
-            "8",
-            "9",
-            "10",
-            "5"
-        ],
-        correct: "9"
-    },
-    {
-        question: "Imate odobrenje nadležnog Ministarstva za prodaju oružja. Koji obrt možete otvoriti?",
-        answers: [
-            "paušalni obrt",
-            "vezani obrt",
-            "ništa navedeno",
-            "slobodni obrt",
-            "povlašteni obrt"
-        ],
-        correct: "povlašteni obrt"
-    },
-    {
-        question: "Bruto II kod osobnog dohotka je:",
-        answers: [
-            "ništa od navedenog",
-            "trošak poslodavcu bez zdravstvenog osiguranja za zaposlenika",
-            "ukupni trošak zaposlenika poslodavcu",
-            "iznos koji poslodavac isplaćuje zaposleniku na tekući račun",
-            "sve navedeno"
-        ],
-        correct: "ukupni trošak zaposlenika poslodavcu"
-    },
-    {
-        question: "Kriteriji određivanja veličine poduzeća:",
-        answers: [
-            "prihodi, ukupna aktiva i broj zaposlenika",
-            "ukupna aktiva i prihodi",
-            "ništa navedeno",
-            "prihodi, rashodi i broj zaposlenika",
-            "prihodi i broj zaposlenika"
-        ],
-        correct: "prihodi, ukupna aktiva i broj zaposlenika"
-    },
-    {
-        question: "Validacija je",
-        answers: [
-            "isto što i amortizacija",
-            "neto iznos poduzeća",
-            "vrijednost poduzeća",
-            "potvrda proizvoda od strane tržišta",
-            "sposobnost povećanja količine proizvodnje bez povećanja troškova",
-            "no answer"
-        ],
-        correct: "potvrda proizvoda od strane tržišta"
-    },
-    {
-        question: "Imate bruto iznos 1.400€, osobni odbitak 600€, zdravstveno osiguranje 200€, doprinose MIO 300€, porez 100€, koliki je neto:",
-        answers: [
-            "1.000€",
-            "500€",
-            "900€",
-            "400€",
-            "800€",
-            "no answer"
-        ],
-        correct: "800€"
-    },
-    {
-        question: "Razlika između glasača na izborima je u:",
-        answers: [
-            "postotnom bodu",
-            "postotku",
-            "broju glasova",
-            "sve navedeno",
-            "ništa navedenom",
-            "no answer"
-        ],
-        correct: "postotnom bodu"
-    },
-    {
-        question: "Imate bruto iznos 2.500€, osobni odbitak 600€, zdravstveno osiguranje 500€, doprinose MIO 700€, porez 300€, koliki je neto:",
-        answers: [
-            "1.000€",
-            "1.200€",
-            "1.100€",
-            "1.300€",
-            "1.500€",
-            "no answer"
-        ],
-        correct: "1.000€"
-    },
-    {
-        question: "Pojam ekosustav vežemo uz:",
-        answers: [
-            "poljoprivredu",
-            "bootstraping",
-            "ništa od navedenog",
-            "ekologiju",
-            "startup",
-            "no answer"
-        ],
-        correct: "startup"
-    },
-    {
-        question: "Koja je najlikvidnija imovina:",
-        answers: [
-            "nekretnine",
-            "novac",
-            "ništa navedeno",
-            "obveznice",
-            "dionice",
-            "no answer"
-        ],
-        correct: "novac"
-    },
-    {
-        question: "Amortizacija je definirana zakonom o.",
-        answers: [
-            "porezu na investiranje",
-            "porezu na dobit",
-            "porezu na dohodak",
-            "porezu o poduzećima",
-            "porezu na nekretnine",
-            "no answer"
-        ],
-        correct: "porezu na dobit"
-    },
-    {
-        question: "Što je ETF:",
-        answers: [
-            "mirovinski fond",
-            "ništa navedeno",
-            "dohodak",
-            "investicijski fond",
-            "obvezni fond",
-            "no answer"
-        ],
-        correct: "investicijski fond"
-    },
-    {
-        question: "Kada se isplaćuje drugi dohodak:",
-        answers: [
-            "ništa navedeno",
-            "ugovora o djelu",
-            "osobnog odbitka",
-            "osobnog dohotka",
-            "dionica",
-            "no answer"
-        ],
-        correct: "ugovora o djelu"
-    },
-    {
-        question: "U poslovnom svijetu što je 3F?",
-        answers: [
-            "fondovi",
-            "prijatelji",
-            "obitelj",
-            "sve navedeno",
-            "obitelj, prijatelji i osobe koje vjeruju u tvoj poslovni pothvat",
-            "no answer"
-        ],
-        correct: "obitelj, prijatelji i osobe koje vjeruju u tvoj poslovni pothvat"
-    },
-    {
-        question: "Kod (O)PG proizvodnja je za:",
-        answers: [
-            "ništa navedeno",
-            "poduzeća",
-            "vlastite potrebe",
-            "zaposlenika",
-            "potrebe tržišta i za ovo pdf str 96",
-            "no answer"
-        ],
-        correct: "potrebe tržišta i za ovo pdf str 96"
-    },
-    {
-        question: "Što je EKS kod kredita:",
-        answers: [
-            "depozit",
-            "glavnica",
-            "ništa navedeno",
-            "ukupni iznos kredita",
-            "učešće",
-            "no answer"
-        ],
-        correct: "ukupni iznos kredita"
-    },
-    {
-        question: "Koliko imamo obveznih mirovinskih fondova u Republici Hrvatskoj:",
-        answers: [
-            "3",
-            "4",
-            "1",
-            "ništa navedeno",
-            "2",
-            "no answer"
-        ],
-        correct: "2"
-    },
-    {
-        question: "Kada je potrebno izdati eRačun:",
-        answers: [
-            "kod poslovanja s obrtnicima",
-            "ništa navedeno",
-            "kod poslovanja s obveznicima javne nabave",
-            "kod poslovanja sa svim obrtima i trgovačkim društvima",
-            "kod poslovanja s trgovačkim društvima",
-            "no answer"
-        ],
-        correct: "kod poslovanja s obveznicima javne nabave"
-    },
-    {
-        question: "Imate bruto iznos 1.400€, osobni odbitak 600€, zdravstveno osiguranje 200€, doprinose MIO 300€, porez 100€, koliki je neto:",
-        answers: [
-            "1.000€",
-            "500€",
-            "900€",
-            "400€",
-            "800€",
-            "no answer"
-        ],
-        correct: "800€"
-    },
-    {
-        question: "Kod većih prihoda a manjih rashoda govorimo o:",
-        answers: [
-            "bilanci",
-            "neto iznosu",
-            "bruto iznosu",
-            "dobiti",
-            "gubitku",
-            "no answer"
-        ],
-        correct: "dobiti"
-    },
-    {
-        question: "Na tržištu kapitala najdominantnije su:",
-        answers: [
-            "obveznice",
-            "banke",
-            "dividende",
-            "kamate",
-            "ništa navedeno",
-            "no answer"
-        ],
-        correct: "obveznice"
-    },
-    {
-        question: "Što je skaliranje kod startupa:",
-        answers: [
-            "bankrot",
-            "sposobnost povećanja proizvodnje bez povećanja troškova",
-            "ništa navedeno",
-            "potvrda proizvoda na tržištu",
-            "fluktacija na tržištu",
-            "no answer"
-        ],
-        correct: "sposobnost povećanja proizvodnje bez povećanja troškova"
-    },
-    {
-        question: "Čemu služi osobni odbitak:",
-        answers: [
-            "umanjuje poreznu osnovicu",
-            "umanjuje doprinose",
-            "ništa od navedenog",
-            "umanjuje osobni dohodak",
-            "povećava doprinose",
-            "no answer"
-        ],
-        correct: "umanjuje poreznu osnovicu"
-    },
-    {
-        question: "2. stup mirovinskog osiguranja je:",
-        answers: [
-            "dobrovoljni stup mirovinskog osiguranja",
-            "obvezan samo za mlađe osobe do 30 godina",
-            "obvezan kod osoba u mirovini",
-            "obvezan za starije osobe od 30 godina",
-            "obvezan stup mirovinskog osiguranja za sve zaposlenike",
-            "no answer"
-        ],
-        correct: "obvezan stup mirovinskog osiguranja za sve zaposlenike"
-    },
-    {
-        question: "Kod ugovora o djelu, isplaćuje se",
-        answers: [
-            "ništa navedeno",
-            "dohodak od nesamostalnog rada",
-            "dohodak od samostalnog i ne samostalnog rada",
-            "autorski honorar",
-            "drugi dohodak",
-            "no answer"
-        ],
-        correct: "drugi dohodak"
+        correct: "Pristup retku (RAS)."
     }
 ];
 
