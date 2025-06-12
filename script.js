@@ -1,168 +1,451 @@
 const questions = [
     {
-        question: "Što je osnovna svrha kombinacijskih modula?",
+        question: "ŠTO SE PIŠE U SETUP FUNKCIJI NA ARDUINU?",
         answers: [
-            "Pohranjivanje velike količine podataka.",
-            "Izgradnja složenijih sustava od jednostavnih komponenti.",
-            "Kontrola rada sekvencijskih sklopova.",
-            "Mjerenje vremena i frekvencije.",
-            "Izvršavanje aritmetičkih operacija nad cijelim i miješanim brojevima."
+            "Podešavaju se početne vrijednosti i konfiguriraju pinovi."
         ],
-        correct: "Izgradnja složenijih sustava od jednostavnih komponenti."
+        correct: "Podešavaju se početne vrijednosti i konfiguriraju pinovi."
     },
     {
-        question: "Koja je tipična oznaka za dekoder s 'n' ulaznih bitova?",
+        question: "U ČEMU ISKAZUJEMO ELEKTRIČNI NAPON?",
         answers: [
-            "MUX n/2^n",
-            "KOD n/2^n",
-            "DEK n/2^n",
-            "DEMUX 2^n/n",
-            "PLA n/m"
+            "Volt (V)"
         ],
-        correct: "DEK n/2^n"
+        correct: "Volt (V)"
     },
     {
-        question: "Što se događa s izlazima dekodera ako je ulaz 'E' (enable) postavljen na 0?",
+        question: "KOLIKO SIGNALNIH ŽICA IMA 12C?",
         answers: [
-            "Svi izlazi su u stanju 1.",
-            "Samo jedan izlaz je u stanju 1.",
-            "Svi izlazi su u stanju 0.",
-            "Dekoder se aktivira.",
-            "Izlazi su invertirani."
+            "Dvije (SDA i SCL)"
         ],
-        correct: "Svi izlazi su u stanju 0."
+        correct: "Dvije (SDA i SCL)"
     },
     {
-        question: "Koja je glavna funkcionalnost demultipleksora?",
+        question: "ŠTO RADI NAREDBA DIGITAL WRITE (10,HIGH);?",
         answers: [
-            "Biranje informacije s jednog od ulaza i prijenos na jedan izlaz.",
-            "Primanje informacije na jednom ulazu i raspodjela na jedan od više izlaza.",
-            "Kodiranje binarnih kodnih riječi.",
-            "Usporedba dva n-bitna broja.",
-            "Generiranje periodičkih nizova impulsa."
+            "Postavlja digitalni pin 10 na visoki logički nivo (HIGH)."
         ],
-        correct: "Primanje informacije na jednom ulazu i raspodjela na jedan od više izlaza."
+        correct: "Postavlja digitalni pin 10 na visoki logički nivo (HIGH)."
     },
     {
-        question: "Koja je obrnuta funkcionalnost od demultipleksora?",
+        question: "AKO KOMPILIRAMO I POKRENEMO OVAKAV PROGRAM KOJA OD OVIH TVRDNJI JE TOČNA? (Pitanje se odnosi na sliku programa)",
+        answers: [
+            "LED dioda na pinu 13 će treptati."
+        ],
+        correct: "LED dioda na pinu 13 će treptati."
+    },
+    {
+        question: "NA MIKROKONTROLER SU SPOJENE LED DIODE PREKO OTPORNIKA NA PINOVE 2, 3 I 4. UZ OVAKO NAPISANI PROGRAM KOJE LED DIODE ĆE SVIJETLITI KADA POKRENEMO PROGRAM: (Pitanje se odnosi na sliku programa)",
+        answers: [
+            "Sve tri će biti ugašene."
+        ],
+        correct: "Sve tri će biti ugašene."
+    },
+    {
+        question: "POMOĆU KOJE SABIRNICE SE POSTAVLJA INICIJALNO ARDUINO BOOTLOADER NA ATMEL MIKROKONTROLERIMA?",
+        answers: [
+            "ISP (In-System Programming)"
+        ],
+        correct: "ISP (In-System Programming)"
+    },
+    {
+        question: "NA MIKROKONTROLER JE SPOJEN POTENCIOMETAR (JOYSTICK OS) NA AO PIN. UPOTRIJEBLJEN JE KOD NA SLICI. KOLIKA JE VRIJEDNOST VARIJABLE A KADA JE POTENCIOMETAR U IDEALNOM SREDNJEM POLOŽAJU? (Pitanje se odnosi na sliku koda i sheme)",
+        answers: [
+            "511-512"
+        ],
+        correct: "511-512"
+    },
+    {
+        question: "KOJU METODU KORISTIMO ZA SERIJSKU KOMUNIKACIJU NA ARDUINU?",
+        answers: [
+            "Serial.begin() i Serial.print()"
+        ],
+        correct: "Serial.begin() i Serial.print()"
+    },
+    {
+        question: "KOJA JE RAZLIKA IZMEĐU DIGITALNOG I ANALOGNOG PINA NA ARDUINU?",
+        answers: [
+            "Digitalni pinovi imaju samo dva stanja (HIGH/LOW), analogni mogu čitati niz vrijednosti."
+        ],
+        correct: "Digitalni pinovi imaju samo dva stanja (HIGH/LOW), analogni mogu čitati niz vrijednosti."
+    },
+    {
+        question: "KOJA JE SVRHA FUNKCIJE DELAY() U ARDUINO PROGRAMIRANJU?",
+        answers: [
+            "Pauzira izvršavanje programa na određeno vrijeme (u milisekundama)."
+        ],
+        correct: "Pauzira izvršavanje programa na određeno vrijeme (u milisekundama)."
+    },
+    {
+        question: "ŠTO JE PWM SIGNAL I GDJE SE KORISTI NA ARDUINU?",
+        answers: [
+            "PWM (Pulse Width Modulation) mijenja širinu pulsa, koristi se za kontrolu svjetline LED dioda, brzine motora itd."
+        ],
+        correct: "PWM (Pulse Width Modulation) mijenja širinu pulsa, koristi se za kontrolu svjetline LED dioda, brzine motora itd."
+    },
+    {
+        question: "ŠTO JE ARDUINO BOOTLOADER I KOJA JE NJEGOVA FUNKCIJA?",
+        answers: [
+            "Mali program u mikrokontroleru koji omogućava učitavanje novog koda preko serijske veze bez vanjskog programatora."
+        ],
+        correct: "Mali program u mikrokontroleru koji omogućava učitavanje novog koda preko serijske veze bez vanjskog programatora."
+    },
+    {
+        question: "KOJA JE RAZLIKA IZMEĐU GLOBALE I LOKALNE VARIJABLE U C++ (ARDUINO) PROGRAMIRANJU?",
+        answers: [
+            "Globalne varijable su dostupne svugdje, lokalne samo unutar funkcije u kojoj su definirane."
+        ],
+        correct: "Globalne varijable su dostupne svugdje, lokalne samo unutar funkcije u kojoj su definirane."
+    },
+    {
+        question: "KOJI JE NAJVEĆI BROJ KOJI SE MOŽE ZAPISATI U 8-BITNOM REGISTRU BEZ PREDZNAKA?",
+        answers: [
+            "255"
+        ],
+        correct: "255"
+    },
+    {
+        question: "KOJI JE NAJMANJI BROJ KOJI SE MOŽE ZAPISATI U 8-BITNOM REGISTRU S PREDZNAKOM?",
+        answers: [
+            "-128"
+        ],
+        correct: "-128"
+    },
+    {
+        question: "KOJI JE NAJVEĆI BROJ KOJI SE MOŽE ZAPISATI U 8-BITNOM REGISTRU S PREDZNAKOM?",
+        answers: [
+            "127"
+        ],
+        correct: "127"
+    },
+    {
+        question: "NA MIKROKONTROLER JE SPOJENA LED DIODA NA PIN 13. UZ OVAKO NAPISANI PROGRAM ŠTO ĆE SE DOGODITI KADA GA POKRENEMO? (Pitanje se odnosi na sliku programa)",
+        answers: [
+            "LED dioda će se upaliti bijelo."
+        ],
+        correct: "LED dioda će se upaliti bijelo."
+    },
+    {
+        question: "U ČEMU ISKAZUJEMO ELEKTRIČNU STRUJU?",
+        answers: [
+            "Amper (A)"
+        ],
+        correct: "Amper (A)"
+    },
+    {
+        question: "U ČEMU ISKAZUJEMO KAPACITET KONDENZATORA?",
+        answers: [
+            "Farad (F)"
+        ],
+        correct: "Farad (F)"
+    },
+    {
+        question: "U ČEMU ISKAZUJEMO ELEKTRIČNI NABOJ (KOLIČINU ELEKTRICITETA)?",
+        answers: [
+            "Coulomb (C)"
+        ],
+        correct: "Coulomb (C)"
+    },
+    {
+        question: "NA MIKROKONTROLER SU SPOJENE LED DIODE PREKO OTPORNIKA NA PINOVE 2, 3 I 4. UZ OVAKO NAPISANI PROGRAM KOJE LED DIODE ĆE SVIJETLITI KADA POKRENEMO PROGRAM: (Pitanje se odnosi na sliku programa)",
+        answers: [
+            "Sve tri će biti ugašene."
+        ],
+        correct: "Sve tri će biti ugašene."
+    },
+    {
+        question: "KADA PARALELNO SPOJIMO OTPORNIKE NJIHOVA UKUPNA VRIJEDNOST JE JEDNAKA?",
+        answers: [
+            "Ukupnom recipročnom zbroju vrijednosti, pa sve to s 1/X."
+        ],
+        correct: "Ukupnom recipročnom zbroju vrijednosti, pa sve to s 1/X."
+    },
+    {
+        question: "KAKO NAZIVAMO MATERIJALE KOJI DOZVOLJAVAJU KRETANJE SLOBODNIH ELEKTRONA?",
+        answers: [
+            "Vodiči"
+        ],
+        correct: "Vodiči"
+    },
+    {
+        question: "KAKO NAZIVAMO MATERIJALE KOJI MIJENJAJU SVOJA SVOJSTVA IZ VODIČA U IZOLATORE I OBRNUTO U OVISNOSTI O ODREĐENIM UVJETIMA?",
+        answers: [
+            "Poluvodiči"
+        ],
+        correct: "Poluvodiči"
+    },
+    {
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=0; B=1; C=1; D=0; E=0; F=1; G=1?",
+        answers: [
+            "0",
+            "2",
+            "3",
+            "5",
+            "7",
+            "4"
+        ],
+        correct: "3"
+    },
+    {
+        question: "Element čiji je simbol prikazan na slici je:",
         answers: [
             "Dekoder",
-            "Koder",
+            "Potpuno zbrajalo",
             "Multipleksor",
-            "Komparator",
-            "Pretvornik koda"
+            "Poluzbrajalo",
+            "ROM"
         ],
-        correct: "Multipleksor"
+        correct: "Poluzbrajalo" // Pretpostavljeno na temelju simbola, jer slika nije vidljiva.
     },
     {
-        question: "Što je karakteristika prioritetnog kodera ako je aktivno više ulaza?",
+        question: "Permanentna memorija realizirana MOSFET tehnologijom prikazana je na slici. O koliko se memorije radi?",
         answers: [
-            "Aktivan je samo ulaz s najmanjim indeksom.",
-            "Aktivan je samo ulaz s najvećim indeksom.",
-            "Svi aktivni ulazi se kodiraju istovremeno.",
-            "Koder se deaktivira.",
-            "Djeluje samo onaj ulaz koji je prvi postao aktivan."
+            "2x4",
+            "4x4",
+            "4x5",
+            "5x5",
+            "2x5"
         ],
-        correct: "Aktivan je samo ulaz s najvećim indeksom."
+        correct: "4x4" // Pretpostavljeno na temelju slike, jer slika nije vidljiva.
     },
     {
-        question: "Koji sklop pretvara kodne riječi jednog koda u kodne riječi drugog koda?",
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=1, B=1; C=1; D=1; E=0; F=0; G=1?",
         answers: [
+            "6",
+            "5",
+            "8",
+            "1",
+            "3"
+        ],
+        correct: "8"
+    },
+    {
+        question: "Kojom od tablica kombinacija se ostvaruje sljedeći kombinacijski logički sklop: MUX 8/1",
+        answers: [
+            "ABCD 0000", // Ova i sljedeće opcije su nejasne bez potpune tablice
+            "ABCOZ 000",
+            "ABC Diz",
+            "Ništa od navedenog"
+        ],
+        correct: "Ništa od navedenog" // Bez pune tablice nije moguće točno odgovoriti.
+    },
+    {
+        question: "Element čiji je simbol prikazan na slici je: (Odnosi se na sliku logičkih vrata)",
+        answers: [
+            "XOR",
+            "NAND",
+            "NOR",
+            "NOT",
+            "AND"
+        ],
+        correct: "XOR" // Pretpostavljeno na temelju uobičajenih simbola logičkih vrata.
+    },
+    {
+        question: "Element čiji je simbol prikazan na slici je: (Odnosi se na sliku logičkih vrata)",
+        answers: [
+            "AND",
+            "XOR",
+            "NOT",
+            "NOR",
+            "NAND"
+        ],
+        correct: "AND" // Pretpostavljeno na temelju uobičajenih simbola logičkih vrata.
+    },
+    {
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=1; B=1; C=1; D=1; E=1; F=1; G=0?",
+        answers: [
+            "6",
+            "5",
+            "8",
+            "1",
+            "0"
+        ],
+        correct: "0"
+    },
+    {
+        question: "Element čiji je simbol prikazan na slici je: (Odnosi se na sliku logičkih vrata)",
+        answers: [
+            "NAND",
+            "XOR",
+            "NOT",
+            "NOR",
+            "AND"
+        ],
+        correct: "NOT" // Pretpostavljeno na temelju uobičajenih simbola logičkih vrata.
+    },
+    {
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=1; B=1; C=1; D=0; E=0; F=1; G=1?",
+        answers: [
+            "6",
+            "5",
+            "9",
+            "1",
+            "3"
+        ],
+        correct: "9"
+    },
+    {
+        question: "Element čiji je simbol prikazan na slici je: (Odnosi se na sliku logičkih vrata)",
+        answers: [
+            "XOR",
+            "NAND",
+            "NOT",
+            "NOR",
+            "AND"
+        ],
+        correct: "NAND" // Pretpostavljeno na temelju uobičajenih simbola logičkih vrata.
+    },
+    {
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=1; B=0; C=0; D=1; E=1; F=0; G=1?",
+        answers: [
+            "6",
+            "2",
+            "8",
+            "1",
+            "3"
+        ],
+        correct: "2"
+    },
+    {
+        question: "Koja znamenka će se prikazati na 7-segmentnom indikatoru ako 7-segmentni kod ima sljedeću kombinaciju A=0; B=0; C=1; D=0; E=0; F=1; G=0?",
+        answers: [
+            "6",
+            "2",
+            "8",
+            "1",
+            "3"
+        ],
+        correct: "1"
+    },
+    {
+        question: "Koji od navedenih sklopova je bistabil?",
+        answers: [
+            "Sklop prikazan na slici.", // Pitanje se odnosi na sliku, ovdje je samo tekstualni opis
+            "Niti jedan od navedenih."
+        ],
+        correct: "Sklop prikazan na slici." // Pretpostavljeno na temelju konteksta, jer slika nije dostupna
+    },
+    {
+        question: "Memorijski element čiji je simbol prikazan na slici je:",
+        answers: [
+            "JK bistabil",
+            "RS bistabil",
+            "D bistabil",
+            "T bistabil",
+            "ništa od navedenog"
+        ],
+        correct: "D bistabil" // Pretpostavljeno na temelju simbola, jer slika nije vidljiva.
+    },
+    {
+        question: "Koji su točni ulazi na JK bistabilu za preklapanje (toggle)?",
+        answers: [
+            "J=1, K=0",
+            "J=0, K=1",
+            "J=1, K=1",
+            "J=0, K=0",
+            "ništa od navedenog"
+        ],
+        correct: "J=1, K=1"
+    },
+    {
+        question: "Memorijski element čiji je simbol prikazan na slici je:",
+        answers: [
+            "JK bistabil",
+            "RS bistabil",
+            "D bistabil",
+            "T bistabil",
+            "ništa od navedenog"
+        ],
+        correct: "JK bistabil" // Pretpostavljeno na temelju simbola, jer slika nije vidljiva.
+    },
+    {
+        question: "Memorijski element čiji je simbol prikazan na slici je:",
+        answers: [
+            "JK bistabil",
+            "RS bistabil",
+            "D bistabil",
+            "T bistabil",
+            "ništa od navedenog"
+        ],
+        correct: "T bistabil" // Pretpostavljeno na temelju simbola, jer slika nije vidljiva.
+    },
+    {
+        question: "Memorijski element čiji je simbol prikazan na slici je:",
+        answers: [
+            "JK bistabil",
+            "RS bistabil",
+            "D bistabil",
+            "T bistabil",
+            "ništa od navedenog"
+        ],
+        correct: "RS bistabil" // Pretpostavljeno na temelju simbola, jer slika nije vidljiva.
+    },
+    {
+        question: "Registri su sekvencijski logički sklopovi namijenjeni za:",
+        answers: [
+            "Pohranjivanje višebitnih podataka",
+            "Izvršavanje aritmetičkih operacija",
+            "Generiranje taktnih impulsa",
+            "Pretvaranje koda",
+            "Uspoređivanje podataka",
+            "ništa od navedenog"
+        ],
+        correct: "Pohranjivanje višebitnih podataka"
+    },
+    {
+        question: "Koja je glavna razlika između serijskog i paralelnog registra?",
+        answers: [
+            "Serijski upis i ispis podataka s mehanizmom pomicanja, paralelni omogućuju istovremeni pristup svim bitovima.",
+            "Serijski su brži od paralelnih.",
+            "Paralelni koriste manje bistabila.",
+            "Serijski registri se ne mogu koristiti za spremanje podataka.",
+            "Nema razlike."
+        ],
+        correct: "Serijski upis i ispis podataka s mehanizmom pomicanja, paralelni omogućuju istovremeni pristup svim bitovima."
+    },
+    {
+        question: "Johnsonovo brojilo, koje se postiže povratnom vezom s izlaza posmačnog registra na ulaz ($D_0 = \\bar{Q}_{n-1}$), omogućava povećanje broja stanja za dani broj bistabila na:",
+        answers: [
+            "$2n$",
+            "$n^2$",
+            "$2^n$",
+            "$n$",
+            "Nijedan odgovor nije točan."
+        ],
+        correct: "$2n$"
+    },
+    {
+        question: "Koji je osnovni element za izgradnju posmačnog registra?",
+        answers: [
+            "Multipleksor",
             "Dekoder",
-            "Koder",
-            "Multipleksor",
-            "Pretvornik koda",
-            "Komparator"
+            "Flip-flop (bistabil)",
+            "Aritmetičko-logička jedinica (ALU)",
+            "Brojilo"
         ],
-        correct: "Pretvornik koda"
+        correct: "Flip-flop (bistabil)"
     },
     {
-        question: "Koji su mogući izlazi komparatora za usporedbu dva n-bitna broja A i B?",
+        question: "U kojoj se memoriji podaci zadržavaju i kada nema napajanja?",
         answers: [
-            "A XOR B",
-            "A AND B, A OR B",
-            "A = B, A > B, A < B",
-            "SUM, CARRY",
-            "Q, Q̄"
+            "Volatile memorija",
+            "SRAM",
+            "Nepostojana memorija",
+            "Postojana (non-volatile) memorija",
+            "DRAM"
         ],
-        correct: "A = B, A > B, A < B"
+        correct: "Postojana (non-volatile) memorija"
     },
     {
-        question: "Što je radni dio procesora koji obavlja operacije nad cijelim i miješanim brojevima?",
+        question: "Kapacitet memorije se izražava kao umnožak broja adresnih bitova 'n' i broja bitova izlazne riječi 'b' na sljedeći način:",
         answers: [
-            "RAM",
-            "ROM",
-            "ALU (Aritmetičko-logička jedinica)",
-            "Kontrolna jedinica",
-            "Registar"
+            "$C = n \\times b$",
+            "$C = 2^n$",
+            "$C = 2^n \\times b$",
+            "$C = n + b$",
+            "$C = 2^b$"
         ],
-        correct: "ALU (Aritmetičko-logička jedinica)"
-    },
-    {
-        question: "Koja je osnovna funkcija poluzbrajala (Half-adder)?",
-        answers: [
-            "Zbrajanje tri binarne znamenke.",
-            "Oduzimanje dvije binarne znamenke.",
-            "Zbrajanje dvije binarne znamenke.",
-            "Množenje dvije binarne znamenke.",
-            "Računanje prijenosa za više bitova."
-        ],
-        correct: "Zbrajanje dvije binarne znamenke."
-    },
-    {
-        question: "Koja metoda rješava problem serijskog rasprostiranja prijenosa kod zbrajanja višebitnih brojeva?",
-        answers: [
-            "Kaskadiranje poluzbrajala.",
-            "Korištenje akumulatora.",
-            "Izdvojeno generiranje prijenosa (Carry Look-Ahead - CLA).",
-            "Zbrajanje u BCD kodu.",
-            "Primjena posmačnih registara."
-        ],
-        correct: "Izdvojeno generiranje prijenosa (Carry Look-Ahead - CLA)."
-    },
-    {
-        question: "Što je potrebno kod BCD zbrajanja ako je suma između 10 i 15, ili veća od 15?",
-        answers: [
-            "Oduzimanje 6 (0110).",
-            "Dodavanje 6 (0110) radi korekcije.",
-            "Zbrajanje se poništava.",
-            "Nema potrebe za korekcijom.",
-            "Primjena kružnog posmaka."
-        ],
-        correct: "Dodavanje 6 (0110) radi korekcije."
-    },
-    {
-        question: "Koja vrsta posmaka ponavlja najznačajniji bit pri posmaku udesno za brojeve s predznakom?",
-        answers: [
-            "Logički posmak.",
-            "Kružni posmak.",
-            "Aritmetički posmak.",
-            "Cirkularni posmak.",
-            "Nema takvog posmaka."
-        ],
-        correct: "Aritmetički posmak."
-    },
-    {
-        question: "Koja memorija zadržava podatke i kada nema napajanja?",
-        answers: [
-            "Volatile memorija.",
-            "SRAM.",
-            "Nepostojana memorija.",
-            "Postojana (non-volatile) memorija.",
-            "DRAM."
-        ],
-        correct: "Postojana (non-volatile) memorija."
-    },
-    {
-        question: "Što je kapacitet memorije ako je 'n' broj adresnih bitova i 'b' broj bitova izlazne riječi?",
-        answers: [
-            "C = n * b",
-            "C = 2^n",
-            "C = 2^n * b",
-            "C = n + b",
-            "C = 2^b"
-        ],
-        correct: "C = 2^n * b"
+        correct: "$C = 2^n \\times b$"
     },
     {
         question: "Koja je glavna karakteristika PROM memorije?",
@@ -196,61 +479,6 @@ const questions = [
             "PAL ima manji broj programirljivih sklopki."
         ],
         correct: "Kod PAL-a je programirljiva samo matrica I sklopova."
-    },
-    {
-        question: "Što je bistabil?",
-        answers: [
-            "Kombinacijski logički sklop.",
-            "Sekvencijski sklop za brojanje impulsa.",
-            "Memorijski element, digitalni sklop s dva stabilna stanja.",
-            "Sklop za usporedbu brojeva.",
-            "Element za pretvorbu koda."
-        ],
-        correct: "Memorijski element, digitalni sklop s dva stabilna stanja."
-    },
-    {
-        question: "Koji tip bistabila služi samo za pamćenje jednog bita informacije i koristi se za registre i memorije?",
-        answers: [
-            "SR bistabil",
-            "JK bistabil",
-            "T bistabil",
-            "D bistabil",
-            "RS bistabil"
-        ],
-        correct: "D bistabil"
-    },
-    {
-        question: "Što je osnovna svrha registara u digitalnim sustavima?",
-        answers: [
-            "Izvršavanje aritmetičkih operacija.",
-            "Pohranjivanje višebitnih podataka.",
-            "Generiranje taktnih impulsa.",
-            "Pretvaranje koda.",
-            "Uspoređivanje podataka."
-        ],
-        correct: "Pohranjivanje višebitnih podataka."
-    },
-    {
-        question: "Koja je karakteristika posmačnih registara?",
-        answers: [
-            "Samo paralelni upis i ispis podataka.",
-            "Nema mehanizma pomicanja podataka.",
-            "Serijski upis i ispis podataka s mehanizmom pomicanja.",
-            "Sastavljeni su od nepovezanih bistabila.",
-            "Koriste se isključivo za dijeljenje frekvencije."
-        ],
-        correct: "Serijski upis i ispis podataka s mehanizmom pomicanja."
-    },
-    {
-        question: "Koja je primjena Johnsonovog brojila koja se postiže povratnom vezom s izlaza posmačnog registra na ulaz (D0 \n\t​=Q\n\tˉ\n\t​n−1\n\t​)?",
-        answers: [
-            "Smanjenje broja stanja.",
-            "Povećanje broja stanja za dani broj bistabila (2n).",
-            "Samo brojanje u binarnom kodu.",
-            "Isključivo asinkroni rad.",
-            "Pojednostavljeno dekodiranje stanja bez dodatnog sklopa."
-        ],
-        correct: "Povećanje broja stanja za dani broj bistabila (2n)."
     },
     {
         question: "Koja je temeljna jedinica informacije u memoriji?",
@@ -306,6 +534,17 @@ const questions = [
             "Čitanje podataka."
         ],
         correct: "Pristup retku (RAS)."
+    },
+    {
+        question: "Od kojeg do kojeg binarnog broja broji brojilo sa slike? (Pitanje se odnosi na sliku brojila)",
+        answers: [
+            "0-0", // Ove opcije su nejasne bez slike
+            "0-2",
+            "0-3",
+            "0-1",
+            "Ništa od navedenoga"
+        ],
+        correct: "Ništa od navedenoga" // Nije moguće odgovoriti bez slike.
     }
 ];
 
