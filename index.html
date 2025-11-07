@@ -1,20 +1,1119 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kviz znanja</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Interactive Business Exam</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+            overflow: hidden;
+        }
+        
+        /* --- Header --- */
+        .quiz-header {
+            padding: 20px 30px;
+            background-color: #005a9c;
+            color: #fff;
+        }
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.6em;
+        }
+        .quiz-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-top: 15px;
+            opacity: 0.9;
+        }
+        
+        /* --- Quiz Body --- */
+        .quiz-body {
+            padding: 30px;
+        }
+        #question-text {
+            font-size: 1.25em;
+            font-weight: 500;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            min-height: 75px;
+        }
+        
+        /* --- Options --- */
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            text-align: left;
+            color: #333;
+            background-color: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option-btn:not(:disabled):hover {
+            background-color: #e6f7ff;
+            border-color: #007bff;
+        }
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+            font-weight: bold;
+        }
+        
+        /* --- Footer / Feedback --- */
+        .quiz-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #eee;
+            min-height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #feedback-text {
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        #feedback-text.correct {
+            color: #28a745;
+        }
+        #feedback-text.incorrect {
+            color: #dc3545;
+        }
+        #next-btn {
+            padding: 12px 25px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            visibility: hidden; /* Hidden by default */
+        }
+        #next-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        /* --- Results --- */
+        #results-container {
+            padding: 40px;
+            text-align: center;
+            line-height: 1.7;
+        }
+        #results-container h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        #results-container p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        #results-container .pass {
+            color: #155724;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+        #results-container .fail {
+            color: #721c24;
+            font-weight: bold;
+            font-size: 1.4em;
+        }
+        #restart-btn {
+            margin-top: 25px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #restart-btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <h1 id="question-number"></h1>
-        <h2 id="question"></h2>
-        <div id="answers" class="answers-container"></div>
-        <p id="feedback" class="feedback-message"></p>
-        <button id="next-button">Dalje</button>
+
+    <div class="container">
+        
+        <div id="quiz-container">
+            <div class="quiz-header">
+                <h1>Business Exam</h1>
+                <div class="quiz-stats">
+                    <span id="question-number">Question 1 / 30</span>
+                    <span id="score-display">Score: 0.00</span>
+                </div>
+            </div>
+            
+            <div class="quiz-body">
+                <div id="question-text">Loading question...</div>
+                <div id="options-container">
+                    </div>
+            </div>
+            
+            <div class="quiz-footer">
+                <div id="feedback-text"></div>
+                <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+        
+        <div id="results-container" style="display: none;">
+            </div>
+
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // --- THE FULL QUESTION BANK ---
+        const questionBank = [
+            // --- Topic 1 Questions ---
+            {
+                question: "What is the primary function of a company as defined in Topic 1?",
+                options: [
+                    "To buy factors, transform them, and sell products on the market.",
+                    "To generate maximum profit for shareholders, regardless of factors.",
+                    "To only sell products in a market.",
+                    "To provide services but not goods."
+                ],
+                answer: "To buy factors, transform them, and sell products on the market."
+            },
+            {
+                question: "What is the main difference between a 'good' and a 'service'?",
+                options: [
+                    "A good is a material object, while a service is an activity.",
+                    "Goods are sold by companies, services are provided by individuals.",
+                    "Goods are factors; services are products.",
+                    "Goods are expensive; services are cheap."
+                ],
+                answer: "A good is a material object, while a service is an activity."
+            },
+            {
+                question: "Why is the customer considered 'specially critical' for a company's viability?",
+                options: [
+                    "Because they provide the factors of production.",
+                    "Because the company is only viable if customers are free and ready to pay for its product.",
+                    "Because laws force them to buy the company's products.",
+                    "Because they set the company's marketing strategy."
+                ],
+                answer: "Because the company is only viable if customers are free and ready to pay for its product."
+            },
+            {
+                question: "Which of the following lists the four main functional areas of a company described as an open system?",
+                options: [
+                    "Production, Financial, Marketing, and Management.",
+                    "R&D, Human Resources, Sales, and Legal.",
+                    "Strategy, Operations, Logistics, and Customer Service.",
+                    "Suppliers, Buyers, Competitors, and Substitutes."
+                ],
+                answer: "Production, Financial, Marketing, and Management."
+            },
+            {
+                question: "What is the difference between the generic and specific environment?",
+                options: [
+                    "The generic environment affects all companies (e.g., laws), while the specific environment affects companies in the same market (e.g., competitors).",
+                    "The generic environment affects competitors; the specific environment affects all companies.",
+                    "The generic environment is internal; the specific environment is external.",
+                    "The generic environment refers to technology; the specific environment refers to politics."
+                ],
+                answer: "The generic environment affects all companies (e.g., laws), while the specific environment affects companies in the same market (e.g., competitors)."
+            },
+            {
+                question: "In Porter's Five Forces, which force analyzes the number of suppliers, their size, and the uniqueness of their service?",
+                options: [
+                    "Buyer Power.",
+                    "Supplier Power.",
+                    "Threat of New Entry.",
+                    "Competitive Rivalry."
+                ],
+                answer: "Supplier Power."
+            },
+            {
+                question: "A market that requires high investment, specialist knowledge, and has strong technology protection would have...",
+                options: [
+                    "A high Threat of New Entry.",
+                    "A low Threat of New Entry.",
+                    "A high Threat of Substitution.",
+                    "A high Buyer Power."
+                ],
+                answer: "A low Threat of New Entry."
+            },
+            {
+                question: "If customers can easily find a different way of doing what your product does (e.g., doing a process manually instead of using your software), this is a high...",
+                options: [
+                    "Threat of Substitution.",
+                    "Buyer Power.",
+                    "Supplier Power.",
+                    "Competitive Rivalry."
+                ],
+                answer: "Threat of Substitution."
+            },
+            {
+                question: "An organizational structure that groups jobs based on similar functional activities (e.g., Production Dept., Marketing Dept., Financial Dept.) is called a...",
+                options: [
+                    "Geographic structure.",
+                    "Product structure.",
+                    "Functional structure.",
+                    "Customer depending structure."
+                ],
+                answer: "Functional structure."
+            },
+            {
+                question: "A multinational company that organizes its divisions into 'West', 'East', and 'North' sales regions is using a...",
+                options: [
+                    "Geographic structure.",
+                    "Functional structure.",
+                    "Product structure.",
+                    "Customer depending structure."
+                ],
+                answer: "Geographic structure."
+            },
+            {
+                question: "If a company deals with only a few, powerful buyers, this situation is described by Porter as...",
+                options: [
+                    "High Buyer Power.",
+                    "Low Buyer Power.",
+                    "High Supplier Power.",
+                    "Low Competitive Rivalry."
+                ],
+                answer: "High Buyer Power."
+            },
+            {
+                question: "Economic factors, political/legal factors, and technological factors are all part of the...",
+                options: [
+                    "Specific Environment.",
+                    "Generic Environment.",
+                    "Internal Environment.",
+                    "Competitive Environment."
+                ],
+                answer: "Generic Environment."
+            },
+            {
+                question: "A company that groups its jobs into 'Big Companies', 'SME's', 'Homes', and 'Public Administration' is using a...",
+                options: [
+                    "Functional structure.",
+                    "Product structure.",
+                    "Geographic structure.",
+                    "Customer depending structure."
+                ],
+                answer: "Customer depending structure."
+            },
+            {
+                question: "According to Porter, 'Economies of scale' and 'Specialist knowledge' are examples of...",
+                options: [
+                    "Drivers of Supplier Power.",
+                    "Drivers of Buyer Power.",
+                    "Barriers to Entry (part of Threat of New Entry).",
+                    "Drivers of Substitution."
+                ],
+                answer: "Barriers to Entry (part of Threat of New Entry)."
+            },
+            {
+                question: "What is the main purpose of Porter's Five Forces analysis?",
+                options: [
+                    "To determine the internal strengths and weaknesses of a company.",
+                    "To determine the competitive power and attractiveness of a business situation or market.",
+                    "To create a financial forecast for the next five years.",
+                    "To define the company's functional structure."
+                ],
+                answer: "To determine the competitive power and attractiveness of a business situation or market."
+            },
+
+            // --- Topic 2 Questions ---
+            {
+                question: "What is a key difference between Alex Osterwalder's Business Model Canvas and Ash Maurya's Lean Canvas?",
+                options: [
+                    "Osterwalder's is for large companies; Maurya's is only for non-profits.",
+                    "Osterwalder's has 'Key Partners' and 'Key Resources', while Maurya's (for startups) replaces them with 'Problem', 'Solution', 'Key Metrics', and 'Unfair Advantage'.",
+                    "Osterwalder's has 9 blocks; Maurya's has 12 blocks.",
+                    "Osterwalder's focuses on costs; Maurya's ignores costs."
+                ],
+                answer: "Osterwalder's has 'Key Partners' and 'Key Resources', while Maurya's (for startups) replaces them with 'Problem', 'Solution', 'Key Metrics', and 'Unfair Advantage'."
+            },
+            {
+                question: "In a SWOT analysis, 'Strengths' and 'Weaknesses' refer to...",
+                options: [
+                    "External factors in the environment.",
+                    "Internal attributes of the organization.",
+                    "Future potential strategies.",
+                    "Factors related only to competitors."
+                ],
+                answer: "Internal attributes of the organization."
+            },
+            {
+                question: "In a SWOT analysis for a new electric car company, a new government subsidy for electric vehicle buyers would be classified as an...",
+                options: [
+                    "Strength.",
+                    "Weakness.",
+                    "Opportunity.",
+                    "Threat."
+                ],
+                answer: "Opportunity."
+            },
+            {
+                question: "In Spain, what is the main difference between a 'persona física' (artificial person) and a 'persona jurídica' (legal person)?",
+                options: [
+                    "A 'persona física' (e.g., Sole Proprietor/Autónomo) is the same as the owner, while a 'persona jurídica' (e.g., SL or SA) is a separate legal entity from its owners.",
+                    "A 'persona física' pays corporate tax (Impuesto de Sociedades), while a 'persona jurídica' pays personal income tax (IRPF).",
+                    "A 'persona física' has limited liability, while a 'persona jurídica' has unlimited liability.",
+                    "A 'persona física' requires 60,000€ capital; a 'persona jurídica' requires 3,000€."
+                ],
+                answer: "A 'persona física' (e.g., Sole Proprietor/Autónomo) is the same as the owner, while a 'persona jurídica' (e.g., SL or SA) is a separate legal entity from its owners."
+            },
+            {
+                question: "Which Spanish juridical form requires a minimum share capital of 60,000€?",
+                options: [
+                    "Sociedad de Responsabilidad Limitada (SL)",
+                    "Empresario Individual (Autónomo)",
+                    "Sociedad Cooperativa",
+                    "Sociedad Anónima (SA)"
+                ],
+                answer: "Sociedad Anónima (SA)"
+            },
+            {
+                question: "In a 'Sociedad de Responsabilidad Limitada' (SL), what is the liability of the partners towards third parties?",
+                options: [
+                    "Liability is unlimited, affecting their personal assets.",
+                    "Liability is limited to the capital they contributed to the company.",
+                    "Liability is unlimited, *except* for their principal residence (if they are a Limited Liability Entrepreneur).",
+                    "Only one partner has unlimited liability; the rest are limited."
+                ],
+                answer: "Liability is limited to the capital they contributed to the company."
+            },
+            {
+                question: "A 'Sociedad Cooperativa' (Cooperative) is primarily characterized by...",
+                options: [
+                    "Being owned by a single person (Sole Proprietor).",
+                    "Requiring a minimum of 60,000€ capital, just like an SA.",
+                    "Its democratic nature, where the General Assembly (all members) makes decisions, often with one vote per member.",
+                    "Having its shares traded on the stock market."
+                ],
+                answer: "Its democratic nature, where the General Assembly (all members) makes decisions, often with one vote per member."
+            },
+            {
+                question: "Which of the following is *not* one of the four main types of procedures for setting up a business in Spain?",
+                options: [
+                    "Tax procedures (e.g., NIF, VAT).",
+                    "Social procedures (e.g., Social Security).",
+                    "Marketing procedures (e.g., creating a logo).",
+                    "Municipal procedures (e.g., business license)."
+                ],
+                answer: "Marketing procedures (e.g., creating a logo)."
+            },
+            {
+                question: "Requesting the NIF (Fiscal Identification Code) from the tax agency and registering for VAT (IVA) and IAE (Impuesto sobre Actividades Económicas) are all examples of...",
+                options: [
+                    "Tax procedures.",
+                    "Social procedures.",
+                    "Business procedures (deed and registry).",
+                    "Municipal procedures."
+                ],
+                answer: "Tax procedures."
+            },
+            {
+                question: "In the Lean Canvas model, what block defines 'something that cannot be easily copied or bought' by competitors?",
+                options: [
+                    "Unique Value Proposition.",
+                    "Solution.",
+                    "Unfair Advantage.",
+                    "Key Metrics."
+                ],
+                answer: "Unfair Advantage."
+            },
+            {
+                question: "Which document has the common goal of determining 'with a reasonable degree of certainty the economic viability of the project'?",
+                options: [
+                    "Business Model Canvas",
+                    "Business Plan",
+                    "SWOT Analysis",
+                    "Company Registry Deed"
+                ],
+                answer: "Business Plan"
+            },
+            {
+                question: "A company's 'brand awareness and credibility' would be classified in a SWOT analysis as a(n)...",
+                options: [
+                    "Strength.",
+                    "Weakness.",
+                    "Opportunity.",
+                    "Threat."
+                ],
+                answer: "Strength."
+            },
+            {
+                question: "An 'emerging need for your product' in the market would be classified in a SWOT analysis as a(n)...",
+                options: [
+                    "Strength.",
+                    "Weakness.",
+                    "Opportunity.",
+                    "Threat."
+                ],
+                answer: "Opportunity."
+            },
+            {
+                question: "A 'skill gap on your team' would be classified in a SWOT analysis as a(n)...",
+                options: [
+                    "Strength.",
+                    "Weakness.",
+                    "Opportunity.",
+                    "Threat."
+                ],
+                answer: "Weakness."
+            },
+            {
+                question:"'Market trends that could become a threat' are an example of which SWOT category?",
+                options: [
+                    "Strength.",
+                    "Weakness.",
+                    "Opportunity.",
+                    "Threat."
+                ],
+                answer: "Threat."
+            },
+            {
+                question: "Which juridical form in Spain is for a single owner ('Autónomo') and has unlimited liability?",
+                options: [
+                    "Sole Proprietor (Empresario Individual)",
+                    "Limited Liability Company (SL)",
+                    "Public Limited Company (SA)",
+                    "Cooperative (Sociedad Cooperativa)"
+                ],
+                answer: "Sole Proprietor (Empresario Individual)"
+            },
+            {
+                question: "Registering the company and its workers with 'Seguridad Social' is part of which procedure?",
+                options: [
+                    "Business procedures",
+                    "Tax procedures",
+                    "Social procedures",
+                    "Municipal procedures"
+                ],
+                answer: "Social procedures"
+            },
+            {
+                question: "In the Lean Canvas, the 'Problem' block is meant to define...",
+                options: [
+                    "The top 3 problems your customers face.",
+                    "The problems your startup is facing.",
+                    "The problems with your competitors' products.",
+                    "The problems with your cost structure."
+                ],
+                answer: "The top 3 problems your customers face."
+            },
+            {
+                question: "What is the purpose of the 'Start Up Expenses' spreadsheet in a business plan?",
+                options: [
+                    "To forecast sales for the next 12 months.",
+                    "To analyze if there will be a profit.",
+                    "To analyze the money needed to start the business.",
+                    "To define the company's juridical form."
+                ],
+                answer: "To analyze the money needed to start the business."
+            },
+            {
+                question: "The 'Sales Forecast' template in a business plan is used to...",
+                options: [
+                    "Analyze how much you expect to sell in the next 12 months.",
+                    "Analyze the money needed to start.",
+                    "Analyze the company's weaknesses.",
+                    "Analyze the difference between what is sold and what is spent."
+                ],
+                answer: "Analyze how much you expect to sell in the next 12 months."
+            },
+
+            // --- Topic 3 Questions ---
+            {
+                question: "Marketing that is based on the analysis of the needs of individuals and companies to guide the company towards economic opportunities is known as...",
+                options: [
+                    "Operational Marketing.",
+                    "Strategic Marketing.",
+                    "Social Marketing.",
+                    "Seller's Marketing."
+                ],
+                answer: "Strategic Marketing."
+            },
+            {
+                question: "A 'Seller's Market' is characterized by...",
+                options: [
+                    "The supply of goods exceeding customer demand.",
+                    "The supply of goods not being enough to handle customer requests.",
+                    "Companies focusing heavily on market research and branding.",
+                    "Intense competition between many companies."
+                ],
+                answer: "The supply of goods not being enough to handle customer requests."
+            },
+            {
+                question: "In the BCG (Growth/Share) Matrix, what is a 'Star' product?",
+                options: [
+                    "High market growth, High market share.",
+                    "Low market growth, High market share.",
+                    "High market growth, Low market share.",
+                    "Low market growth, Low market share."
+                ],
+                answer: "High market growth, High market share."
+            },
+            {
+                question: "A 'Useful/Cow' (Cash Cow) product is characterized by...",
+                options: [
+                    "Needing large amounts of cash to maintain its position in a fast-growing market.",
+                    "Generating large amounts of cash (cash-flow) in a low-growth market.",
+                    "Having a low market share in a high-growth market.",
+                    "Being a 'Disaster/Dog' and needing to be removed from the portfolio."
+                ],
+                answer: "Generating large amounts of cash (cash-flow) in a low-growth market."
+            },
+            {
+                question: "A 'Question' product (Question Mark) typically has...",
+                options: [
+                    "Low market share in a low-growth market.",
+                    "High market share in a high-growth market.",
+                    "Low market share in a high-growth market.",
+                    "High market share in a low-growth market."
+                ],
+                answer: "Low market share in a high-growth market."
+            },
+            {
+                question: "During which phase of the Product Life Cycle are marketing strategies focused on informing and 'forming' customers, telling them the product exists and how to use it?",
+                options: [
+                    "Introduction Phase.",
+                    "Growth Phase.",
+                    "Maturity Phase.",
+                    "Decline Phase."
+                ],
+                answer: "Introduction Phase."
+            },
+            {
+                question: "In which phase of the Product Life Cycle do sales and profits peak (or stabilize), there are no new buyers, and marketing efforts focus on attracting competitors' buyers?",
+                options: [
+                    "Introduction Phase.",
+                    "Growth Phase.",
+                    "Maturity Phase.",
+                    "Decline Phase."
+                ],
+                answer: "Maturity Phase."
+            },
+            {
+                question: "The 'Pareto's Analysis' (80/20 rule) in product mix suggests that...",
+                options: [
+                    "80% of your products contribute to 20% of your turnover.",
+                    "20% of your products contribute to 80% of your turnover.",
+                    "All products contribute equally (20%) to turnover.",
+                    "A company should have 80 products in its mix and 20 in development."
+                ],
+                answer: "20% of your products contribute to 80% of your turnover."
+            },
+            {
+                question: "What is the goal of Search Engine Optimization (SEO)?",
+                options: [
+                    "To pay for the number of clicks on an advertisement (PPC).",
+                    "To structurally change a website to appear better positioned in *unpaid* search engine results.",
+                    "To send commercial messages directly via email (Email Marketing).",
+                    "To ensure bloggers write positive reviews about the company."
+                ],
+                answer: "To structurally change a website to appear better positioned in *unpaid* search engine results."
+            },
+            {
+                question: "In digital marketing, what is a 'lead'?",
+                options: [
+                    "A competitor's customer.",
+                    "Someone who has shown interest in your product/service and provided contact information (like an email).",
+                    "The final sale of a product.",
+                    "A banner advertisement on a website."
+                ],
+                answer: "Someone who has shown interest in your product/service and provided contact information (like an email)."
+            },
+            {
+                question: "Marketing that includes actions like product policy, distribution, pricing, and communication monitoring is known as...",
+                options: [
+                    "Operational Marketing.",
+                    "Strategic Marketing.",
+                    "Social Marketing.",
+                    "Buyer's Marketing."
+                ],
+                answer: "Operational Marketing."
+            },
+            {
+                question: "In a 'Buyer's Market' (first phase), what new marketing element appears to make products different from the competition?",
+                options: [
+                    "Brands.",
+                    "Barcodes.",
+                    "Lower prices.",
+                    "Factories."
+                ],
+                answer: "Brands."
+            },
+            {
+                question: "According to P. Kotler, 'Social Marketing' takes into account consumers' desires, consumers' interests, company's interests, and...",
+                options: [
+                    "Society's interests.",
+                    "Government's interests.",
+                    "Competitors' interests.",
+                    "Shareholders' interests."
+                ],
+                answer: "Society's interests."
+            },
+            {
+                question: "A 'Disaster/Dog' product in the BCG matrix is characterized by...",
+                options: [
+                    "High market growth, High market share.",
+                    "Low market growth, High market share.",
+                    "High market growth, Low market share.",
+                    "Low market growth, Low market share."
+                ],
+                answer: "Low market growth, Low market share."
+            },
+            {
+                question: "In the Product Life Cycle, which phase is characterized by customers already knowing the product and the need to encourage 'selective demand (brand)'?",
+                options: [
+                    "Introduction Phase.",
+                    "Growth Phase.",
+                    "Maturity Phase.",
+                    "Decline Phase."
+                ],
+                answer: "Growth Phase."
+            },
+            {
+                question: "When sales and profits decrease, and a company must decide to remove, maintain, or encourage the product (re-launch), it is in the...",
+                options: [
+                    "Introduction Phase.",
+                    "Growth Phase.",
+                    "Maturity Phase.",
+                    "Decline Phase."
+                ],
+                answer: "Decline Phase."
+            },
+            {
+                question: "The 'Ideal Matrix' (BCG) success sequence often shows a product's life as...",
+                options: [
+                    "Question -> Star -> Cow -> Dog",
+                    "Star -> Cow -> Question -> Dog",
+                    "Dog -> Cow -> Star -> Question",
+                    "Cow -> Star -> Question -> Dog"
+                ],
+                answer: "Question -> Star -> Cow -> Dog"
+            },
+            {
+                question: "What is a 'name, term, sign, symbol, design, or a combination of these' that identifies a seller's goods and differentiates them from competitors?",
+                options: [
+                    "A Product",
+                    "A Label",
+                    "A Brand",
+                    "A Package"
+                ],
+                answer: "A Brand"
+            },
+            {
+                question: "A label that only shows the product's quality (e.g., 'top-quality beef') is a...",
+                options: [
+                    "Class tag.",
+                    "Brand tag.",
+                    "Information tag.",
+                    "Descriptive tag."
+                ],
+                answer: "Class tag."
+            },
+            {
+                question: "Products that meet needs not yet solved by any other product are considered...",
+                options: [
+                    "Truly new products.",
+                    "Replacement products.",
+                    "Mature products.",
+                    "Cow products."
+                ],
+                answer: "Truly new products."
+            },
+            {
+                question: "What digital marketing technique involves paying for advertisements that appear on search engine results pages (SERPs)?",
+                options: [
+                    "SEO (Search Engine Optimization)",
+                    "SMM (Social Media Marketing)",
+                    "PPC (Pay per Click) / SEM",
+                    "Email Marketing"
+                ],
+                answer: "PPC (Pay per Click) / SEM"
+            },
+            {
+                question: "The four processes of digital marketing listed in the document are: User acquisition, Turning users into leads, Turning leads into customers, and...",
+                options: [
+                    "Building customer loyalty.",
+                    "Creating a blog.",
+                    "Optimizing SEO.",
+                    "Paying for clicks."
+                ],
+                answer: "Building customer loyalty."
+            },
+            {
+                question: "Using 'banners and sponsorship' on other web pages is an example of which user acquisition technique?",
+                options: [
+                    "SEO",
+                    "Web marketing",
+                    "Blog presence",
+                    "Online public relations"
+                ],
+                answer: "Web marketing"
+            },
+            {
+                question: "In digital marketing, 'improving the usability of the website' and using 'call to action' buttons are techniques for...",
+                options: [
+                    "User acquisition.",
+                    "Turning users into leads.",
+                    "Building customer loyalty.",
+                    "Web analytics."
+                ],
+                answer: "Turning users into leads."
+            },
+            {
+                question: "Sending newsletters, surprising customers, and building social relationships are all techniques for...",
+                options: [
+                    "User acquisition.",
+                    "Turning users into leads.",
+                    "Turning leads into customers.",
+                    "Building customer loyalty."
+                ],
+                answer: "Building customer loyalty."
+            },
+
+            // --- Mixed / Terminology Questions ---
+            {
+                question: "What is the official, legal name of a company that appears on all documentation?",
+                options: [
+                    "The Trademark",
+                    "The Company Name (or Corporate Name)",
+                    "The CEO",
+                    "The CIF"
+                ],
+                answer: "The Company Name (or Corporate Name)"
+            },
+            {
+                question: "The statement of the 'object, purpose and raison d'être' of a company is its...",
+                options: [
+                    "Mission",
+                    "Vision",
+                    "Strategy",
+                    "Share Capital"
+                ],
+                answer: "Mission"
+            },
+            {
+                question: "What does the 'Vision' of a company represent?",
+                options: [
+                    "What the company's raison d'être is right now.",
+                    "What the company wants to become in the long term.",
+                    "The company's corporate image.",
+                    "The company's share capital."
+                ],
+                answer: "What the company wants to become in the long term."
+            },
+            {
+                question: "As of 2008 in Spain, the CIF (Código de Identificación Fiscal) was replaced by the...",
+                options: [
+                    "NIF (Número de Identificación Fiscal)",
+                    "DNI",
+                    "CNAE",
+                    "SA"
+                ],
+                answer: "NIF (Número de Identificación Fiscal)"
+            },
+            {
+                question: "The value of assets and contributions made by shareholders, which serves as a guarantee to third parties, is the...",
+                options: [
+                    "Liabilities",
+                    "Assets",
+                    "Share Capital",
+                    "Net Worth"
+                ],
+                answer: "Share Capital"
+            },
+            {
+                question: "What is the minimum legal share capital for a 'Sociedad de responsabilidad limitada' (SL) in Spain?",
+                options: [
+                    "60,000 euros",
+                    "3,000 euros",
+                    "1 euro",
+                    "There is no minimum."
+                ],
+                answer: "3,000 euros"
+            },
+            {
+                question: "What is the 'CNAE' (National Classification of Economic Activities)?",
+                options: [
+                    "A tax identification code.",
+                    "A classification system to group production units by their economic activity.",
+                    "A legal form of a company.",
+                    "A measure of a company's assets."
+                ],
+                answer: "A classification system to group production units by their economic activity."
+            },
+            {
+                question: "On a balance sheet, the 'debts that the company has' are known as its...",
+                options: [
+                    "Assets",
+                    "Liabilities",
+                    "Net Worth",
+                    "Share Capital"
+                ],
+                answer: "Liabilities"
+            },
+            {
+                question: "On a balance sheet, the 'goods and rights that a company has' (e.g., buildings, equipment) are known as its...",
+                options: [
+                    "Assets",
+                    "Liabilities",
+                    "Net Worth",
+                    "Debts"
+                ],
+                answer: "Assets"
+            },
+            {
+                question: "In Spain, who is the 'Junta General de Accionistas' (General Meeting of Shareholders)?",
+                options: [
+                    "The main governing body for a Sociedad Anónima (SA), composed of all shareholders.",
+                    "The main governing body for a Sociedad Limitada (SL).",
+                    "The person responsible for the daily management of the company.",
+                    "The governing body of a Cooperative."
+                ],
+                answer: "The main governing body for a Sociedad Anónima (SA), composed of all shareholders."
+            },
+            {
+                question: "In Spain, who is the 'Consejo de Administración' (Board of Directors)?",
+                options: [
+                    "The main governing body for a Cooperative.",
+                    "All the partners in a Sociedad Limitada (SL).",
+                    "A body that manages and represents the company (often in an SA or large SL), appointed by the General Meeting.",
+                    "The main owner of a Sole Proprietorship."
+                ],
+                answer: "A body that manages and represents the company (often in an SA or large SL), appointed by the General Meeting."
+            }
+        ];
+
+        // --- GLOBAL VARIABLES ---
+        let examQuestions = []; // This will hold the 30 shuffled questions
+        let currentQuestionIndex = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let totalScore = 0.0;
+        const totalExamQuestions = 30;
+        const passingCorrectCount = 18;
+        const penalty = 1 / 3;
+
+        // --- DOM ELEMENT VARIABLES ---
+        // These will be assigned *after* the DOM loads
+        let quizContainer;
+        let resultsContainer;
+        let questionNumberEl;
+        let scoreDisplayEl;
+        let questionTextEl;
+        let optionsContainerEl;
+        let feedbackTextEl;
+        let nextBtn;
+
+        // --- FUNCTIONS ---
+
+        /**
+         * Shuffles an array in place using the Fisher-Yates algorithm.
+         */
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        /**
+         * Resets all variables and starts a new exam.
+         */
+        function startExam() {
+            // **FIX:** Assign DOM elements *after* DOM has loaded
+            quizContainer = document.getElementById('quiz-container');
+            resultsContainer = document.getElementById('results-container');
+            questionNumberEl = document.getElementById('question-number');
+            scoreDisplayEl = document.getElementById('score-display');
+            questionTextEl = document.getElementById('question-text');
+            optionsContainerEl = document.getElementById('options-container');
+            feedbackTextEl = document.getElementById('feedback-text');
+            nextBtn = document.getElementById('next-btn');
+
+            // Reset all counters
+            currentQuestionIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+            totalScore = 0.0;
+
+            // Create a shuffled copy of the question bank
+            const shuffledBank = [...questionBank];
+            shuffleArray(shuffledBank);
+            
+            // Get the first 30 questions for this exam
+            examQuestions = shuffledBank.slice(0, totalExamQuestions);
+            
+            // Reset UI
+            updateScoreDisplay();
+            resultsContainer.style.display = 'none';
+            quizContainer.style.display = 'block';
+            
+            // Show the first question
+            showQuestion();
+        }
+
+        /**
+         * Displays the current question and its options.
+         */
+        function showQuestion() {
+            // Get the current question object
+            const q = examQuestions[currentQuestionIndex];
+            
+            // Update question text and number
+            questionTextEl.textContent = q.question;
+            questionNumberEl.textContent = `Question ${currentQuestionIndex + 1} / ${totalExamQuestions}`;
+            
+            // Clear old options and feedback
+            optionsContainerEl.innerHTML = '';
+            feedbackTextEl.textContent = '';
+            feedbackTextEl.className = '';
+            
+            // Create and append new option buttons
+            q.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.className = 'option-btn';
+                button.onclick = () => selectAnswer(button, option, q.answer);
+                optionsContainerEl.appendChild(button);
+            });
+            
+            // Hide the 'Next' button
+            nextBtn.style.visibility = 'hidden';
+        }
+
+        /**
+         * Handles the logic when a user clicks an answer.
+         */
+        function selectAnswer(selectedButton, selectedAnswer, correctAnswer) {
+            // Disable all option buttons
+            const allButtons = optionsContainerEl.getElementsByClassName('option-btn');
+            for (let btn of allButtons) {
+                btn.disabled = true;
+            }
+            
+            // Check if the answer is correct
+            if (selectedAnswer === correctAnswer) {
+                correctCount++;
+                selectedButton.classList.add('correct');
+                feedbackTextEl.textContent = 'Correct!';
+                feedbackTextEl.className = 'correct';
+            } else {
+                incorrectCount++;
+                selectedButton.classList.add('incorrect');
+                feedbackTextEl.textContent = `Incorrect.`;
+                feedbackTextEl.className = 'incorrect';
+                
+                // Highlight the correct answer
+                for (let btn of allButtons) {
+                    if (btn.textContent === correctAnswer) {
+                        btn.classList.add('correct');
+                        break;
+                    }
+                }
+            }
+            
+            // Update score and show 'Next' button
+            updateScoreDisplay();
+            
+            if (currentQuestionIndex === totalExamQuestions - 1) {
+                nextBtn.textContent = 'Finish Exam';
+            } else {
+                nextBtn.textContent = 'Next Question';
+            }
+            nextBtn.style.visibility = 'visible';
+        }
+
+        /**
+         * Updates the score display.
+         */
+        function updateScoreDisplay() {
+            totalScore = correctCount - (incorrectCount * penalty);
+            scoreDisplayEl.textContent = `Score: ${totalScore.toFixed(2)}`;
+        }
+
+        /**
+         * Loads the next question or shows the final results.
+         */
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < totalExamQuestions) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        /**
+         * Hides the quiz and displays the final results.
+         */
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultsContainer.style.display = 'block';
+            
+            const didPass = correctCount >= passingCorrectCount;
+            const passStatus = didPass ? 'PASS' : 'FAIL';
+            const passClass = didPass ? 'pass' : 'fail';
+            
+            resultsContainer.innerHTML = `
+                <h2>Exam Complete!</h2>
+                <p class="${passClass}">Status: ${passStatus}</p>
+                <hr>
+                <p>Correct Answers: <strong>${correctCount}</strong></p>
+                <p>Incorrect Answers: <strong>${incorrectCount}</strong></p>
+                <p>Questions Answered: <strong>${correctCount + incorrectCount} / ${totalExamQuestions}</strong></p>
+                <p>Penalty: <strong>-${(incorrectCount * penalty).toFixed(2)}</strong></p>
+                <h3>Final Score: <strong>${totalScore.toFixed(2)}</strong></h3>
+                <p>(You needed ${passingCorrectCount} correct answers to pass)</p>
+                <button id="restart-btn" onclick="startExam()">Start Again</button>
+            `;
+        }
+
+        // --- INITIALIZATION ---
+        // Start the exam *after* the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', startExam);
+    </script>
+
 </body>
 </html>
